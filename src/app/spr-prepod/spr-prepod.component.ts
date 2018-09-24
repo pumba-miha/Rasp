@@ -14,7 +14,7 @@ export class SprPrepodComponent implements OnInit {
   private prepods: Prepod[] = [];
   public selectedPrepod: Prepod;
   private dataSource = new MatTableDataSource();
-  private displayColumns: string[] = ['PrepodName', 'PrepodSecondName', 'PrepodMiddleName', 'KafedrName'];
+  private displayColumns: string[] = ['objectId', 'PrepodName', 'PrepodSecondName', 'PrepodMiddleName', 'KafedrName'];
 
   constructor(private prepodService: PrepodService, public dialog: MatDialog) {}
 
@@ -42,7 +42,8 @@ export class SprPrepodComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  openDialog(): void {
+  openDialog(prepod: Prepod): void {
+    this.onSelect(prepod);
     const dialogRef = this.dialog.open(SprPrepodDialogComponent, {
       width: '250px',
       data: this.selectedPrepod

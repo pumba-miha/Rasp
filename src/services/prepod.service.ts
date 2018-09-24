@@ -21,7 +21,7 @@ export class PrepodService {
         success: function (_results) {
           result = _results.map((x) => {
             const res = new Prepod();
-            res.objectId = x.get('objectId');
+            res.objectId = x.id;
             res.createdAt = x.get('createdAt');
             res.updatedAt = x.get('updatedAt');
             res.Name = x.get('Name');

@@ -79,6 +79,9 @@ export class TableMaterialModule {}
     SprPrepodComponent,
     SprPrepodDialogComponent
   ],
+  entryComponents: [
+    SprPrepodDialogComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
