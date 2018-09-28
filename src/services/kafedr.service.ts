@@ -20,7 +20,7 @@ export class KafedrService {
         success: function (_results) {
           result = _results.map((x) => {
             const res = new Kafedr();
-            res.objectId = x.get('objectId');
+            res.objectId = x.id;
             res.createdAt = x.get('createdAt');
             res.updatedAt = x.get('updatedAt');
             res.Name = x.get('Name');

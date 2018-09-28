@@ -1,5 +1,21 @@
 <p>
-  spr-prepod-dialog works!
-  {{this.data.Name}},
-  {{this.data.SecondName}},
-</p>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Имя" [(ngModel)]="data.Name" name="Name">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Фамилия" [(ngModel)]="data.SecondName" name="SecondName">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Отчество" [(ngModel)]="data.MiddleName" name="MiddleName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Select" [(ngModel)]="data.Kafedr.objectId" name="kafedrId">
+      <mat-option *ngFor="let kaf of kafedr" [value]="kaf.objectId">
+        {{kaf.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<button mat-button (click)="onSaveClick()">Save</button>
+<button mat-button (click)="onNoClick()">Cancel</button>

@@ -43,6 +43,7 @@ export class SprPrepodComponent implements OnInit {
   }
 
   openDialog(prepod: Prepod): void {
+    if (!prepod){prepod = new Prepod();}
     this.onSelect(prepod);
     const dialogRef = this.dialog.open(SprPrepodDialogComponent, {
       width: '250px',

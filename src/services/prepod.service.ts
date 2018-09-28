@@ -5,8 +5,8 @@ import {BehaviorSubject, from, Observable} from 'rxjs/index';
 
 @Injectable()
 export class PrepodService {
-  private _prepods: BehaviorSubject<any[]> = new BehaviorSubject([]);
-  private observer: Observable<any[]> = this._prepods.asObservable();
+  //private _prepods: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  private observer: Observable<any[]>;//= this._prepods.asObservable();
 
   getPrepod(id?: string ): Promise<Prepod[]> {
     return new Promise<Prepod[]>((resolve) => {
@@ -28,7 +28,7 @@ export class PrepodService {
             res.SecondName = x.get('SecondName');
             res.MiddleName = x.get('MiddleName');
             // Kafedr
-            res.Kafedr.objectId = x.get('IdKafedr').get('objectId');
+            res.Kafedr.objectId = x.get('IdKafedr').id;
             res.Kafedr.Name = x.get('IdKafedr').get('Name');
             return res;
           });
@@ -43,4 +43,33 @@ export class PrepodService {
     return this.observer;
   }
 
+  savePrepod(prepod: Prepod): void {
+    const parcePrepod = ParseObject.extend("Prepod");
+    const parceKafedr = ParseObject.extend("Kafedr");
+    const savedPrepod = new parcePrepod();
+    const savedPrepodKaf = new parceKafedr();
+
+    //Main
+    savedPrepod.set('objectId', prepod.objectId);
+    savedPrepod.set('Name', prepod.Name);
+    savedPrepod.set('SecondName', prepod.SecondName);
+    savedPrepod.set('MiddleName', prepod.MiddleName);
+    //Kafedr
+    savedPrepodKaf.set('objectId', prepod.Kafedr.objectId);
+    //savedPrepodKaf.set('Name', prepod.Kafedr.Name);
+    savedPrepod.set('IdKafedr', savedPrepodKaf);
+
+    savedPrepod.save()
+      .then((savedPrepod) => {
+        // Execute any logic that should take place after the object is saved.
+        alert('New object created with objectId: ' + savedPrepod.id);
+      }, (error) => {
+        // Execute any logic that should take place if the save fails.
+        // error is a Parse.Error with an error code and message.
+        alert('Failed to create new object, with error code: ' + error.message);
+      });
+    this.asObservable();
+  }
 }
+
+
