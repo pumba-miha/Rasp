@@ -21,15 +21,24 @@ export class SprPrepodComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
 
   ngOnInit() {
+    this.prepodService.getData();
     this.getPrepod();
   }
 
   private getPrepod() {
     this.prepodService
+      .observer
+      .subscribe(prepod => {
+        this.dataSource.data = prepod;
+        console.log(this.dataSource.data);
+      });
+    /*
+    this.prepodService
       .asObservable()
       .subscribe(prepod => {
         this.dataSource.data = prepod;
     });
+    */
   }
 
   private onSelect(prepod: Prepod) {
@@ -43,12 +52,14 @@ export class SprPrepodComponent implements OnInit {
   }
 
   openDialog(prepod: Prepod): void {
-    if (!prepod){prepod = new Prepod();}
+    if (!prepod) { prepod = new Prepod(); }
     this.onSelect(prepod);
     const dialogRef = this.dialog.open(SprPrepodDialogComponent, {
       width: '250px',
       data: this.selectedPrepod
     });
   }
+
+
 }
 

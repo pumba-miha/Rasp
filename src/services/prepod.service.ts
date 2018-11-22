@@ -5,8 +5,13 @@ import {BehaviorSubject, from, Observable} from 'rxjs/index';
 
 @Injectable()
 export class PrepodService {
-  //private _prepods: BehaviorSubject<any[]> = new BehaviorSubject([]);
-  private observer: Observable<any[]>;//= this._prepods.asObservable();
+  public observer: Observable<any[]>;
+  private bs: BehaviorSubject<any[]>;
+
+  constructor() {
+    this.bs = new BehaviorSubject<Prepod[]>([new Prepod()]);
+    this.observer = this.bs.asObservable();
+  }
 
   getPrepod(id?: string ): Promise<Prepod[]> {
     return new Promise<Prepod[]>((resolve) => {
@@ -38,37 +43,35 @@ export class PrepodService {
     });
   }
 
-  asObservable(id?: string): Observable<Prepod[]> {
-    this.observer = from(this.getPrepod(id));
-    return this.observer;
+  getData(id?: string) {
+    this.getPrepod(id).then(resolve => {
+      this.bs.next(resolve);
+  });
   }
 
   savePrepod(prepod: Prepod): void {
-    const parcePrepod = ParseObject.extend("Prepod");
-    const parceKafedr = ParseObject.extend("Kafedr");
+    const parcePrepod = ParseObject.extend('Prepod');
+    const parceKafedr = ParseObject.extend('Kafedr');
     const savedPrepod = new parcePrepod();
     const savedPrepodKaf = new parceKafedr();
 
-    //Main
+    // Main
     savedPrepod.set('objectId', prepod.objectId);
     savedPrepod.set('Name', prepod.Name);
     savedPrepod.set('SecondName', prepod.SecondName);
     savedPrepod.set('MiddleName', prepod.MiddleName);
-    //Kafedr
+    // Kafedr
     savedPrepodKaf.set('objectId', prepod.Kafedr.objectId);
-    //savedPrepodKaf.set('Name', prepod.Kafedr.Name);
     savedPrepod.set('IdKafedr', savedPrepodKaf);
 
     savedPrepod.save()
       .then((savedPrepod) => {
-        // Execute any logic that should take place after the object is saved.
-        alert('New object created with objectId: ' + savedPrepod.id);
+        this.getData();
+        // alert('New object created with objectId: ' + savedPrepod.id);
       }, (error) => {
-        // Execute any logic that should take place if the save fails.
-        // error is a Parse.Error with an error code and message.
         alert('Failed to create new object, with error code: ' + error.message);
-      });
-    this.asObservable();
+    });
+    // this.observer.next();
   }
 }
 

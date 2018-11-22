@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Prepod} from '../../classes/prepod';
-import {KafedrService} from "../../services/kafedr.service";
-import {Kafedr} from "../../classes/kafedr";
-import {PrepodService} from "../../services/prepod.service";
+import {KafedrService} from '../../services/kafedr.service';
+import {Kafedr} from '../../classes/kafedr';
+import {PrepodService} from '../../services/prepod.service';
 
 @Component({
   selector: 'app-spr-prepod-dialog',
@@ -23,9 +23,7 @@ export class SprPrepodDialogComponent {
     this.getKafedr();
   }
 
-
-
-  private getKafedr(){
+  private getKafedr() {
     this.kafedrService
       .asObservable()
       .subscribe(kaf => {
@@ -33,8 +31,9 @@ export class SprPrepodDialogComponent {
       });
   }
 
-  onSaveClick(): void{
+  onSaveClick(): void {
     this.prepodService.savePrepod(this.data);
+    this.onNoClick();
   }
 
   onNoClick(): void {
