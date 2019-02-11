@@ -22,9 +22,11 @@ import {SprPrepodComponent} from './spr-prepod/spr-prepod.component';
 import {RouterModule} from '@angular/router';
 import {KafedrService} from '../services/kafedr.service';
 import { SprPrepodDialogComponent } from './spr-prepod-dialog/spr-prepod-dialog.component';
+import { SprKafedrComponent } from './spr-kafedr/spr-kafedr.component';
 
 const routing = RouterModule.forRoot([
-  {path: 'SprPrepod', component: SprPrepodComponent}
+  {path: 'SprPrepod', component: SprPrepodComponent},
+  {path: 'SprKaf', component: SprKafedrComponent}
 ]);
 
 @NgModule({
@@ -66,8 +68,7 @@ const routing = RouterModule.forRoot([
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-  ],
-  declarations: []
+  ]
 })
 export class TableMaterialModule {}
 
@@ -77,7 +78,8 @@ export class TableMaterialModule {}
   declarations: [
     AppComponent,
     SprPrepodComponent,
-    SprPrepodDialogComponent
+    SprPrepodDialogComponent,
+    SprKafedrComponent
   ],
   entryComponents: [
     SprPrepodDialogComponent

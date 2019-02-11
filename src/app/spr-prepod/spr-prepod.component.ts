@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, Inject} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PrepodService} from '../../services/prepod.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {Prepod} from '../../classes/prepod';
@@ -11,7 +11,7 @@ import {SprPrepodDialogComponent} from '../spr-prepod-dialog/spr-prepod-dialog.c
 })
 export class SprPrepodComponent implements OnInit {
 
-  private prepods: Prepod[] = [];
+  // private prepods: Prepod[] = [];
   public selectedPrepod: Prepod;
   private dataSource = new MatTableDataSource();
   private displayColumns: string[] = ['objectId', 'PrepodName', 'PrepodSecondName', 'PrepodMiddleName', 'KafedrName'];
@@ -20,25 +20,17 @@ export class SprPrepodComponent implements OnInit {
 
   @ViewChild('filter') filter: ElementRef;
 
-  ngOnInit() {
-    this.prepodService.getData();
-    this.getPrepod();
+  async ngOnInit() {
+    await this.getPrepod();
   }
 
-  private getPrepod() {
+  private async getPrepod() {
+    this.dataSource.data = await this.prepodService.getData();
     this.prepodService
       .observer
       .subscribe(prepod => {
         this.dataSource.data = prepod;
-        console.log(this.dataSource.data);
       });
-    /*
-    this.prepodService
-      .asObservable()
-      .subscribe(prepod => {
-        this.dataSource.data = prepod;
-    });
-    */
   }
 
   private onSelect(prepod: Prepod) {
@@ -59,7 +51,5 @@ export class SprPrepodComponent implements OnInit {
       data: this.selectedPrepod
     });
   }
-
-
 }
 

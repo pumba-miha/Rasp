@@ -23,9 +23,12 @@ export class SprPrepodDialogComponent {
     this.getKafedr();
   }
 
-  private getKafedr() {
+
+
+   private async getKafedr() {
+    this.kafedr = await this.kafedrService.getData();
     this.kafedrService
-      .asObservable()
+      .observer
       .subscribe(kaf => {
         this.kafedr = kaf;
       });

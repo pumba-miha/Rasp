@@ -10,9 +10,9 @@
     <input matInput placeholder="Отчество" [(ngModel)]="data.MiddleName" name="MiddleName">
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Select" [(ngModel)]="data.Kafedr.objectId" name="kafedrId">
+    <mat-select placeholder="Select" [(ngModel)]="data.IdKafedr.objectId" name="kafedrId">
       <mat-option *ngFor="let kaf of kafedr" [value]="kaf.objectId">
-        {{kaf.Name}}
+        {{kaf.KafedrName}}
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -5,5 +5,5 @@ export class Prepod extends BaseClass {
   public Name = '';
   public SecondName = '';
   public MiddleName = '';
-  public Kafedr = new Kafedr();
+  public IdKafedr = new Kafedr();
 }
