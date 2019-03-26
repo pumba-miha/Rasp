@@ -87,7 +87,6 @@ export class PrepodService {
       }, (error) => {
         alert('Failed to create new object, with error code: ' + error.message);
     });
-
   }
 }
 

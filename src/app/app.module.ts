@@ -21,8 +21,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SprPrepodComponent} from './spr-prepod/spr-prepod.component';
 import {RouterModule} from '@angular/router';
 import {KafedrService} from '../services/kafedr.service';
-import { SprPrepodDialogComponent } from './spr-prepod-dialog/spr-prepod-dialog.component';
-import { SprKafedrComponent } from './spr-kafedr/spr-kafedr.component';
+import {SprPrepodDialogComponent} from './spr-prepod-dialog/spr-prepod-dialog.component';
+import {SprKafedrComponent} from './spr-kafedr/spr-kafedr.component';
+import {SprKafedrDialogComponent} from './spr-kafedr-dialog/spr-kafedr-dialog.component';
+import {FakultService} from '../services/fakult.service';
+
 
 const routing = RouterModule.forRoot([
   {path: 'SprPrepod', component: SprPrepodComponent},
@@ -68,7 +71,8 @@ const routing = RouterModule.forRoot([
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-  ]
+  ],
+  declarations: []
 })
 export class TableMaterialModule {}
 
@@ -79,10 +83,12 @@ export class TableMaterialModule {}
     AppComponent,
     SprPrepodComponent,
     SprPrepodDialogComponent,
-    SprKafedrComponent
+    SprKafedrComponent,
+    SprKafedrDialogComponent
   ],
   entryComponents: [
-    SprPrepodDialogComponent
+    SprPrepodDialogComponent,
+    SprKafedrDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +99,7 @@ export class TableMaterialModule {}
     MatNativeDateModule,
     ReactiveFormsModule,
   ],
-  providers: [ParseService, PrepodService, KafedrService],
+  providers: [ParseService, PrepodService, KafedrService, FakultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

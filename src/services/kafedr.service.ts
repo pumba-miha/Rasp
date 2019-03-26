@@ -27,6 +27,7 @@ export class KafedrService {
       let result: Kafedr[] = [];
       const kafedr = ParseObject.extend('Kafedr');
       const query = new ParseQuery(kafedr);
+      query.include('IdFakult');
       query.find().then((_results) => {
           result = _results.map((x) => {
             console.log(x.toJSON());
@@ -36,6 +37,24 @@ export class KafedrService {
         }
       );
     });
+  }
+  saveKafedr(kafedr: Kafedr): void {
+    const parceKafedr = ParseObject.extend('Kafedr');
+    const parceFakult = ParseObject.extend('Fakult');
+    const savedKafedr = new parceKafedr();
+    const savedKafedrFakult = new parceFakult();
+    // Main
+    parceKafedr.set('objectId', kafedr.objectId);
+    parceKafedr.set('Name', kafedr.KafedrName);
+    // Fakult
+    savedKafedrFakult.set('objectId', kafedr.IdFakult.objectId);
+    parceKafedr.set('IdKafedr', savedKafedrFakult);
+    parceKafedr.save()
+      .then((savedPrepod) => {
+        alert('New object created with objectId: ' + savedPrepod.id);
+      }, (error) => {
+        alert('Failed to create new object, with error code: ' + error.message);
+      });
   }
 /*
   getSubscribe(): void {
