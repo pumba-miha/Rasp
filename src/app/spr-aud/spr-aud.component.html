@@ -11,14 +11,14 @@
     <td mat-cell *matCellDef="let element"> {{element.objectId}} </td>
   </ng-container>
 
-    <ng-container matColumnDef="KafedrName">
-      <th mat-header-cell *matHeaderCellDef>Кафедра</th>
-      <td mat-cell *matCellDef="let element"> {{element.KafedrName}} </td>
-    </ng-container>
+  <ng-container matColumnDef="AudName">
+    <th mat-header-cell *matHeaderCellDef>Аудитория</th>
+    <td mat-cell *matCellDef="let element"> {{element.AudName}} </td>
+  </ng-container>
 
-  <ng-container matColumnDef="FakultName">
-    <th mat-header-cell *matHeaderCellDef>Факультет</th>
-    <td mat-cell *matCellDef="let element"> <p *ngIf="element.IdFakult"> {{element.IdFakult.FakultName}}</p> </td>
+  <ng-container matColumnDef="Capacity">
+    <th mat-header-cell *matHeaderCellDef>Вместимость</th>
+    <td mat-cell *matCellDef="let element"> <p *ngIf="element.Capacity"> {{element.Capacity}}</p> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>

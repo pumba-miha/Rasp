@@ -14,11 +14,11 @@ export class SprPrepodComponent implements OnInit {
   // private prepods: Prepod[] = [];
   public selectedPrepod: Prepod;
   private dataSource = new MatTableDataSource();
-  private displayColumns: string[] = ['objectId', 'PrepodName', 'PrepodSecondName', 'PrepodMiddleName', 'KafedrName'];
+  private displayColumns: string[] = ['objectId', 'PrepodName', 'PrepodSecondName', 'PrepodMiddleName', 'KafedrName', 'IsActive'];
 
   constructor(private prepodService: PrepodService, public dialog: MatDialog) {}
 
-  @ViewChild('filter') filter: ElementRef;
+  // @ViewChild('filter') filter: ElementRef;
 
   async ngOnInit() {
     await this.getPrepod();
@@ -38,8 +38,8 @@ export class SprPrepodComponent implements OnInit {
   }
 
   private applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
+    filterValue = filterValue.trim().toLowerCase();
+    // filterValue = filterValue
     this.dataSource.filter = filterValue;
   }
 

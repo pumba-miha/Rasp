@@ -1,21 +1,21 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Fakult} from '../../classes/fakult';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {KafedrService} from '../../services/kafedr.service';
-import {Kafedr} from '../../classes/kafedr';
 import {FakultService} from '../../services/fakult.service';
+import {GroupService} from '../../services/group.service';
+import {Group} from '../../classes/group';
 
 @Component({
-  selector: 'app-spr-kafedr-dialog',
-  templateUrl: './spr-kafedr-dialog.component.html',
-  styleUrls: ['./spr-kafedr-dialog.component.css']
+  selector: 'app-spr-group-dialog',
+  templateUrl: './spr-group-dialog.component.html',
+  styleUrls: ['./spr-group-dialog.component.css']
 })
-export class SprKafedrDialogComponent {
+export class SprGroupDialogComponent {
   private fakult: Fakult[] = [];
 
-  constructor( public dialogRef: MatDialogRef<SprKafedrDialogComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: Kafedr,
-               private kafedrService: KafedrService,
+  constructor( public dialogRef: MatDialogRef<SprGroupDialogComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: Group,
+               private groupService: GroupService,
                private fakultService: FakultService) {
     this.getFakult();
   }
@@ -33,7 +33,7 @@ export class SprKafedrDialogComponent {
   }
 
   onSaveClick(): void {
-    this.kafedrService.save(this.data);
+    this.groupService.save(this.data);
     this.onNoClick();
   }
 

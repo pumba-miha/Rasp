@@ -11,18 +11,22 @@
     <td mat-cell *matCellDef="let element"> {{element.objectId}} </td>
   </ng-container>
 
-    <ng-container matColumnDef="KafedrName">
-      <th mat-header-cell *matHeaderCellDef>Кафедра</th>
-      <td mat-cell *matCellDef="let element"> {{element.KafedrName}} </td>
-    </ng-container>
+  <ng-container matColumnDef="GroupName">
+    <th mat-header-cell *matHeaderCellDef>Группа</th>
+    <td mat-cell *matCellDef="let element"> <p> {{element.GroupName}}</p> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Kurs">
+    <th mat-header-cell *matHeaderCellDef>Курс</th>
+    <td mat-cell *matCellDef="let element"> <p> {{element.Kurs}}</p> </td>
+  </ng-container>
 
   <ng-container matColumnDef="FakultName">
     <th mat-header-cell *matHeaderCellDef>Факультет</th>
-    <td mat-cell *matCellDef="let element"> <p *ngIf="element.IdFakult"> {{element.IdFakult.FakultName}}</p> </td>
+    <td mat-cell *matCellDef="let element"> <p> {{element.FakultName}}</p> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayColumns;" (click)="openDialog(row)"></tr>
 
 </table>
-

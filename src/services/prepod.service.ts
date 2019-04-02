@@ -16,22 +16,23 @@ export class PrepodService {
   }
 
   async getData() {
-    this.getSubscribe();
+    // this.getSubscribe();
     const result = await this.getDataPromise();
     this._prepod = result;
     this.bs.next(this._prepod);
     return result;
   }
 
-  getDataPromise(): Promise<Prepod[]> {
+  getDataPromise(id?: string): Promise<Prepod[]> {
     return new Promise<Prepod[]>((resolve) => {
       let result: Prepod[] = [];
       const prepod = ParseObject.extend('Prepod');
       const query = new ParseQuery(prepod);
       query.include('IdKafedr');
+      if (id) {query.equalTo('objectId', id); }
       query.find().then((_results) => {
           result = _results.map((prep) => {
-            console.log(prep.toJSON());
+            // console.log(prep.toJSON())
             return prep.toJSON() as Prepod;
           });
           resolve(result);
@@ -40,6 +41,8 @@ export class PrepodService {
     });
   }
 
+
+/*
   getSubscribe(): void {
     const query = new Parse.Query('Prepod');
     query.include('IdKafedr');
@@ -52,6 +55,7 @@ export class PrepodService {
       const foundIndex = this._prepod.findIndex(x => x.objectId === object.id);
       const res = object.toJSON() as Prepod;
       this._prepod[foundIndex] = res;
+      console.log(res);
       this.bs.next(this._prepod);
     });
     this.sub.on('create', (object) => {
@@ -67,8 +71,8 @@ export class PrepodService {
       this.bs.next(this._prepod);
     });
   }
-
-  savePrepod(prepod: Prepod): void {
+*/
+  save(prepod: Prepod): void {
     const parcePrepod = ParseObject.extend('Prepod');
     const parceKafedr = ParseObject.extend('Kafedr');
     const savedPrepod = new parcePrepod();
@@ -78,12 +82,21 @@ export class PrepodService {
     savedPrepod.set('Name', prepod.Name);
     savedPrepod.set('SecondName', prepod.SecondName);
     savedPrepod.set('MiddleName', prepod.MiddleName);
+    savedPrepod.set('IsActive', prepod.IsActive);
     // Kafedr
     savedPrepodKaf.set('objectId', prepod.IdKafedr.objectId);
     savedPrepod.set('IdKafedr', savedPrepodKaf);
+    savedPrepod.set('KafedrName', savedPrepodKaf.get('KafedrName'));
     savedPrepod.save()
       .then((savedPrepod) => {
-        alert('New object created with objectId: ' + savedPrepod.id);
+        console.log('New object created with objectId: ' + savedPrepod.id);
+        const foundIndex = this._prepod.findIndex(x => x.objectId === prepod.objectId);
+        if (foundIndex !== -1) {
+          this._prepod[foundIndex] = savedPrepod.toJSON();
+        } else {
+          this._prepod.push(savedPrepod.toJSON());
+        }
+        this.bs.next(this._prepod);
       }, (error) => {
         alert('Failed to create new object, with error code: ' + error.message);
     });

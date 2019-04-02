@@ -1,11 +1,11 @@
-<p *ngIf="selectedPrepod">{{selectedPrepod.Name}}|{{selectedPrepod.IdKafedr.Name}}</p> <!---->
+<!--<p *ngIf="selectedPrepod">{{selectedPrepod.Name}}|{{selectedPrepod.IdKafedr.Name}}</p> -->
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
 <button mat-button (click)="openDialog()">New</button>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="entertable">
 
   <ng-container matColumnDef="objectId">
     <th mat-header-cell *matHeaderCellDef>Ид</th>
@@ -29,10 +29,16 @@
 
   <ng-container matColumnDef="KafedrName">
     <th mat-header-cell *matHeaderCellDef>Кафедра</th>
-    <td mat-cell *matCellDef="let element"> <p *ngIf="element.IdKafedr">{{element.IdKafedr.KafedrName}}</p></td>
+    <td mat-cell *matCellDef="let element"> <p>{{element.KafedrName}}</p></td>
   </ng-container>
 
-   <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+  <ng-container matColumnDef="IsActive">
+    <th mat-header-cell *matHeaderCellDef>Кафедра</th>
+    <td mat-cell *matCellDef="let element"> <p>{{element.IsActive}}</p></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+
   <tr mat-row *matRowDef="let row; columns: displayColumns;" (click)="openDialog(row)"></tr>
 
 </table>

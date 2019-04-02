@@ -13,23 +13,34 @@ import {
   MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
   MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule,
 } from '@angular/material';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SprPrepodComponent} from './spr-prepod/spr-prepod.component';
-import {RouterModule} from '@angular/router';
-import {KafedrService} from '../services/kafedr.service';
-import {SprPrepodDialogComponent} from './spr-prepod-dialog/spr-prepod-dialog.component';
-import {SprKafedrComponent} from './spr-kafedr/spr-kafedr.component';
-import {SprKafedrDialogComponent} from './spr-kafedr-dialog/spr-kafedr-dialog.component';
-import {FakultService} from '../services/fakult.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SprPrepodComponent } from './spr-prepod/spr-prepod.component';
+import { RouterModule } from '@angular/router';
+import { KafedrService } from '../services/kafedr.service';
+import { SprPrepodDialogComponent } from './spr-prepod-dialog/spr-prepod-dialog.component';
+import { SprKafedrComponent } from './spr-kafedr/spr-kafedr.component';
+import { SprKafedrDialogComponent } from './spr-kafedr-dialog/spr-kafedr-dialog.component';
+import { FakultService } from '../services/fakult.service';
+import { SprFakultComponent } from './spr-fakult/spr-fakult.component';
+import { SprFakultDialogComponent } from './spr-fakult-dialog/spr-fakult-dialog.component';
+import { SprGroupComponent } from './spr-group/spr-group.component';
+import { SprGroupDialogComponent } from './spr-group-dialog/spr-group-dialog.component';
+import { SprAudComponent } from './spr-aud/spr-aud.component';
+import { SprAudDialogComponent } from './spr-aud-dialog/spr-aud-dialog.component';
+import { GroupService} from '../services/group.service';
+import {AudService} from "../services/aud.service";
 
 
 const routing = RouterModule.forRoot([
   {path: 'SprPrepod', component: SprPrepodComponent},
-  {path: 'SprKaf', component: SprKafedrComponent}
+  {path: 'SprKaf', component: SprKafedrComponent},
+  {path: 'SprFakult', component: SprFakultComponent},
+  {path: 'SprGroup', component: SprGroupComponent},
+  {path: 'SprAud', component: SprAudComponent}
 ]);
 
 @NgModule({
@@ -84,11 +95,20 @@ export class TableMaterialModule {}
     SprPrepodComponent,
     SprPrepodDialogComponent,
     SprKafedrComponent,
-    SprKafedrDialogComponent
+    SprKafedrDialogComponent,
+    SprFakultComponent,
+    SprFakultDialogComponent,
+    SprGroupComponent,
+    SprGroupDialogComponent,
+    SprAudComponent,
+    SprAudDialogComponent
   ],
   entryComponents: [
     SprPrepodDialogComponent,
-    SprKafedrDialogComponent
+    SprKafedrDialogComponent,
+    SprFakultDialogComponent,
+    SprGroupDialogComponent,
+    SprAudDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +119,7 @@ export class TableMaterialModule {}
     MatNativeDateModule,
     ReactiveFormsModule,
   ],
-  providers: [ParseService, PrepodService, KafedrService, FakultService],
+  providers: [ParseService, PrepodService, KafedrService, FakultService, GroupService, AudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

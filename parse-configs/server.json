@@ -4,7 +4,7 @@
   "databaseURI":"mongodb://localhost:27017/Rasp",
   "serverURL":"http://localhost:1337/parse",
   "liveQuery": {
-      "classNames": ["Prepod"]
+
   }
 
 }

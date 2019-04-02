@@ -33,7 +33,7 @@ export class SprPrepodDialogComponent {
   }
 
   onSaveClick(): void {
-    this.prepodService.savePrepod(this.data);
+    this.prepodService.save(this.data);
     this.onNoClick();
   }
 

@@ -16,6 +16,8 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+    <mat-checkbox class="example-margin" [(ngModel)]="data.IsActive" name="IsActive">Active</mat-checkbox>
+
 </form>
 <button mat-button (click)="onSaveClick()">Save</button>
 <button mat-button (click)="onNoClick()">Cancel</button>

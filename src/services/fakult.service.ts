@@ -36,4 +36,25 @@ export class FakultService {
       );
     });
   }
+
+  save(fakult: Fakult): void {
+    const parceFakult = ParseObject.extend('Fakult');
+    const savedFakult = new parceFakult();
+    // Main
+    savedFakult.set('objectId', fakult.objectId);
+    savedFakult.set('FakultName', fakult.FakultName);
+    savedFakult.save()
+      .then((savedFakult) => {
+        // alert('New object created with objectId: ' + savedKafedr.id);
+        const foundIndex = this._fakult.findIndex(x => x.objectId === fakult.objectId);
+        if (foundIndex !== -1) {
+          this._fakult[foundIndex] = savedFakult.toJSON();
+        } else {
+          this._fakult.push(savedFakult.toJSON());
+        }
+        this.bs.next(this._fakult);
+      }, (error) => {
+        alert('Failed to create new object, with error code: ' + error.message);
+      });
+  }
 }
